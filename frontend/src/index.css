@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════════════════════
+   AquaSentinel — Global Design System
+   Dark-mode, satellite-tech aesthetic
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Color Tokens */
+  --bg-base:        #060d1a;
+  --bg-surface:     #0d1b2e;
+  --bg-card:        #111f35;
+  --bg-card-hover:  #162540;
+  --border:         rgba(0, 212, 255, 0.12);
+  --border-bright:  rgba(0, 212, 255, 0.35);
+
+  /* Accent Colors */
+  --cyan:     #00d4ff;
+  --cyan-dim: #0099cc;
+  --green:    #00d9a3;
+  --yellow:   #ffb800;
+  --red:      #ff3b3b;
+  --orange:   #ff6b35;
+
+  /* Text */
+  --text-primary:   #e8f4fd;
+  --text-secondary: #7da8c7;
+  --text-muted:     #4a6b84;
+
+  /* Glows */
+  --glow-cyan:   0 0 20px rgba(0, 212, 255, 0.2);
+  --glow-red:    0 0 20px rgba(255, 59, 59, 0.25);
+  --glow-green:  0 0 20px rgba(0, 217, 163, 0.2);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  /* Subtle grid background */
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 3px; }
+
+/* ── Typography ────────────────────────────────────────── */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ── Glassmorphism Card ────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(135deg,
+    rgba(13, 27, 46, 0.9) 0%,
+    rgba(17, 31, 53, 0.8) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ── Animations ────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.fade-in { animation: fadeInUp 0.5s ease both; }
+.fade-in-delay-1 { animation: fadeInUp 0.5s ease 0.1s both; }
+.fade-in-delay-2 { animation: fadeInUp 0.5s ease 0.2s both; }
+.fade-in-delay-3 { animation: fadeInUp 0.5s ease 0.3s both; }
+.fade-in-delay-4 { animation: fadeInUp 0.5s ease 0.4s both; }
+
+/* ── Badge ─────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.badge-critical { background: rgba(255, 59, 59, 0.2);  color: var(--red);    border: 1px solid rgba(255,59,59,0.4); }
+.badge-high     { background: rgba(255,107,53, 0.2);   color: var(--orange); border: 1px solid rgba(255,107,53,0.4); }
+.badge-medium   { background: rgba(255,184,0,  0.15);  color: var(--yellow); border: 1px solid rgba(255,184,0,0.4); }
+.badge-positive { background: rgba(0, 217, 163, 0.15); color: var(--green);  border: 1px solid rgba(0,217,163,0.4); }
+
+/* ── Button ─────────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+  color: #000;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+}
+.btn-primary:active { transform: translateY(0); }
+
+/* ── Input ──────────────────────────────────────────────── */
+.input-field {
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  padding: 8px 12px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+/* ── Leaflet overrides ──────────────────────────────────── */
+.leaflet-container { background: #0d1b2e !important; }
+.leaflet-popup-content-wrapper {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+}
+.leaflet-popup-tip { background: var(--bg-card) !important; }
+
+/* ── Loading Screen ─────────────────────────────────────── */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 24px;
+  background: var(--bg-base);
+}
+.loading-orbit {
+  width: 64px;
+  height: 64px;
+  border: 3px solid rgba(0, 212, 255, 0.1);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* ── Section headings ───────────────────────────────────── */
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* ── Recharts tooltips ──────────────────────────────────── */
+.custom-tooltip {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 14px !important;
+  font-size: 12px;
+}
